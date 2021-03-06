@@ -11,21 +11,18 @@ namespace LocalityBaseNetCore.Controllers
 {
     public class HomeController : Controller
     {
+        private LocalitiesContext db;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(LocalitiesContext context, ILogger<HomeController> logger)
         {
+            db = context;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(db.Localities.ToList());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
