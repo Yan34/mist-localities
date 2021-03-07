@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LocalityBaseNetCore.Models.Locality>
+﻿@model LocalityBaseNetCore.Models.LocalityList
 @{
     ViewData["Title"] = "Главная";
 }
@@ -14,16 +14,20 @@
             <td>Бюджет, дес. мил. руб.</td>
             <td>Глава</td>
         </tr>
-        @foreach (var loc in Model)
+        @foreach (var loc in Model.Localities)
         {
             <tr>
                 <td>@loc.Name</td>
                 <td>@loc.Type</td>
                 <td>@loc.Submission</td>
-                <td>@loc.PeopleCount.ToString("F")</td>
-                <td>@loc.Budget.ToString("F")</td>
+                <td>@loc.PeopleCount.ToString("F").TrimEnd('0').TrimEnd(',')</td>
+                <td>@loc.Budget.ToString("F").TrimEnd('0').TrimEnd(',')</td>
                 <td>@loc.Headman</td>
             </tr>
         }
     </table>
+    <p>Общий бюджет, дес. мил. руб.: @Model.OverallBudget</p>
+    <p>Средний бюджет, дес. мил. руб.: @Model.AverageBudget</p>
+    <p>Общее население, тыс. чел.: @Model.OverallPeople</p>
+    <p>Среднее население, тыс. чел.: @Model.AveragePeople</p>
 </div>

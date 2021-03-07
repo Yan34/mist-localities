@@ -7,11 +7,12 @@ namespace LocalityBaseNetCore.Models
     public class LocalityList
     {
         public List<Locality> Localities { get; set; }
+        public int locsCount { get; set; }
 
-        public decimal OverallPeople { get; set; }
-        public decimal AveragePeople { get; set; }
+        public string OverallPeople { get; set; }
+        public string AveragePeople { get; set; }
         
-        public decimal OverallBudget { get; set; }
-        public decimal AverageBudget { get; set; }
+        public string OverallBudget { get; set; }
+        public string AverageBudget { get; set; }
     }
 }
