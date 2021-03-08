@@ -1,11 +1,16 @@
-﻿@model LocalityBaseNetCore.Models.LocalityList
+﻿@* @model LocalityBaseNetCore.Models.LocalityList *@
+@model IEnumerable<LocalityBaseNetCore.Models.Locality>
 @{
     ViewData["Title"] = "Главная";
 }
 
 <div class="text-center">
     <h1 class="display-4">Населённые пункты</h1>
-    <table>
+    <button id="showAddForm" onclick="toggleTableVisibility()">Добавить населённый пункт</button>
+    <div id="AddLocalityForm" style="visibility: collapse">
+        @await Html.PartialAsync("_AddLocality", new InputLocality());
+    </div>
+    <table class="table-bordered">
         <tr>
             <td>Название</td>
             <td>Тип</td>
@@ -14,7 +19,7 @@
             <td>Бюджет, дес. мил. руб.</td>
             <td>Глава</td>
         </tr>
-        @foreach (var loc in Model.Localities)
+        @foreach (var loc in Model)
         {
             <tr>
                 <td>@loc.Name</td>
@@ -26,8 +31,15 @@
             </tr>
         }
     </table>
-    <p>Общий бюджет, дес. мил. руб.: @Model.OverallBudget</p>
-    <p>Средний бюджет, дес. мил. руб.: @Model.AverageBudget</p>
-    <p>Общее население, тыс. чел.: @Model.OverallPeople</p>
-    <p>Среднее население, тыс. чел.: @Model.AveragePeople</p>
+    <p>Общий бюджет, дес. мил. руб.: @ViewBag.OverallBudget</p>
+    <p>Средний бюджет, дес. мил. руб.: @ViewBag.AverageBudget</p>
+    <p>Общее население, тыс. чел.: @ViewBag.OverallPeople</p>
+    <p>Среднее население, тыс. чел.: @ViewBag.AveragePeople</p>
 </div>
+
+<script>
+    function toggleTableVisibility() {
+        let table=document.getElementById('AddLocalityForm');
+        table.style.visibility==='collapse' ? table.style.visibility='visible' : table.style.visibility='collapse';
+    }
+</script>

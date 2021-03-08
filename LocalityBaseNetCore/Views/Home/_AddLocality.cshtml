@@ -1,0 +1,47 @@
+@model LocalityBaseNetCore.Models.InputLocality
+<form id="addLocalityForm" asp-action="AddLocality">
+    <input type="hidden" value="@ViewBag.id" name="id"/>
+    <table>
+        <tr>
+            <td>Название:</td>
+            <td>
+                <input type="text" asp-for="Name"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Тип:</td>
+            <td>
+                <input type="text" asp-for="Type"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Подчинение:</td>
+            <td>
+                <input type="text" asp-for="Submission"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Население, тыс. чел.:</td>
+            <td>
+                <input type="text" asp-for="PeopleCount"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Бюджет, дес. мил. руб.:</td>
+            <td>
+                <input type="text" asp-for="Budget"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Глава:</td>
+            <td>
+                <input type="text" asp-for="Headman"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" id="Submit" value="Добавить"/>
+            </td><td></td>
+        </tr>
+    </table>
+</form>
