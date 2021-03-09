@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LocalityBaseNetCore.Models;
 using Microsoft.AspNetCore.Http;
+using static LocalityBaseNetCore.LocalitiesStats;
 
 namespace LocalityBaseNetCore.Controllers
 {
@@ -25,105 +26,11 @@ namespace LocalityBaseNetCore.Controllers
         
         public IActionResult Index()
         {
-            ViewBag.OverallPeople = GetOverallPeopleStr();
-            ViewBag.AveragePeople = GetAveragePeopleStr();
-            ViewBag.OverallBudget = GetOverallBudgetStr();
-            ViewBag.AverageBudget = GetAverageBudgetStr();
+            ViewBag.OverallPeople = GetFormattedDecimal(GetOverallPeople(db.GetLocalities()));
+            ViewBag.AveragePeople = GetFormattedDecimal(GetAveragePeople(db.GetLocalities()));
+            ViewBag.OverallBudget = GetFormattedDecimal(GetOverallBudget(db.GetLocalities()));
+            ViewBag.AverageBudget = GetFormattedDecimal(GetAverageBudget(db.GetLocalities()));
             return View(db.GetLocalities());
-        }
-
-        private decimal GetOverallPeople()
-        {
-            List<Locality> locs = db.GetLocalities();
-            decimal OverallPeople=0;
-            if(locs.Count!=0)
-            {
-                foreach (var loc in locs)
-                {
-                    OverallPeople += loc.PeopleCount;
-                }
-            }
-            
-            return OverallPeople;
-        }
-
-        public string GetOverallPeopleStr()
-        {
-            decimal OverallPeople = GetOverallPeople();
-            string OverallPeopleStr = "";
-            OverallPeopleStr = OverallPeople.ToString();
-            OverallPeopleStr = OverallPeopleStr.TrimEnd('0').TrimEnd(',');
-            
-            return OverallPeopleStr;
-        }
-
-        private decimal GetOverallBudget()
-        {
-            List<Locality> locs = db.GetLocalities();
-            decimal OverallBudget=0;
-            if(locs.Count!=0)
-            {
-                foreach (var loc in locs)
-                {
-                    OverallBudget += loc.Budget;
-                }
-            }
-            
-            return OverallBudget;
-        }
-
-        public string GetOverallBudgetStr()
-        {
-            decimal OverallBudget = GetOverallBudget();
-            string OverallBudgetStr = "";
-            OverallBudgetStr = OverallBudget.ToString();
-            OverallBudgetStr = OverallBudgetStr.TrimEnd('0').TrimEnd(',');
-            
-            return OverallBudgetStr;
-        }
-
-        private decimal GetAveragePeople()
-        {
-            int locsCount = db.LocalitiesCount();
-            decimal AveragePeople = 0;
-            if (locsCount != 0)
-            {
-                AveragePeople = decimal.Divide(GetOverallPeople(), locsCount);
-            }
-
-            return AveragePeople;
-        }
-
-        public string GetAveragePeopleStr()
-        {
-            decimal AveragePeople = GetAveragePeople();
-            string AveragePeopleStr = "";
-            AveragePeopleStr = AveragePeople.ToString();
-            AveragePeopleStr = AveragePeopleStr.TrimEnd('0').TrimEnd(',');
-            
-            return AveragePeopleStr;
-        }
-
-        private decimal GetAverageBudget()
-        {
-            int locsCount = db.LocalitiesCount();
-            decimal AverageBudget = 0;
-            if (locsCount != 0)
-            {
-                AverageBudget = decimal.Divide(GetOverallBudget(), locsCount);
-            }
-
-            return AverageBudget;
-        }
-
-        public string GetAverageBudgetStr()
-        {
-            decimal AverageBudget = GetAverageBudget();
-            string AverageBudgetStr = "";
-            AverageBudgetStr = AverageBudget.ToString();
-            AverageBudgetStr = AverageBudgetStr.TrimEnd('0').TrimEnd(',');
-            
-            return AverageBudgetStr;
         }
 
         public IActionResult _AddLocality()
