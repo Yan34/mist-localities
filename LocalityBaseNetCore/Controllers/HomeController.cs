@@ -29,12 +29,12 @@ namespace LocalityBaseNetCore.Controllers
             ViewBag.AveragePeople = GetAveragePeopleStr();
             ViewBag.OverallBudget = GetOverallBudgetStr();
             ViewBag.AverageBudget = GetAverageBudgetStr();
-            return View(db.Localities.ToList());
+            return View(db.GetLocalities());
         }
 
         private decimal GetOverallPeople()
         {
-            List<Locality> locs = db.Localities.ToList();
+            List<Locality> locs = db.GetLocalities();
             decimal OverallPeople=0;
             if(locs.Count!=0)
             {
@@ -59,7 +59,7 @@ namespace LocalityBaseNetCore.Controllers
 
         private decimal GetOverallBudget()
         {
-            List<Locality> locs = db.Localities.ToList();
+            List<Locality> locs = db.GetLocalities();
             decimal OverallBudget=0;
             if(locs.Count!=0)
             {
@@ -84,7 +84,7 @@ namespace LocalityBaseNetCore.Controllers
 
         private decimal GetAveragePeople()
         {
-            int locsCount = db.Localities.Count();
+            int locsCount = db.LocalitiesCount();
             decimal AveragePeople = 0;
             if (locsCount != 0)
             {
@@ -106,7 +106,7 @@ namespace LocalityBaseNetCore.Controllers
 
         private decimal GetAverageBudget()
         {
-            int locsCount = db.Localities.Count();
+            int locsCount = db.LocalitiesCount();
             decimal AverageBudget = 0;
             if (locsCount != 0)
             {
@@ -128,7 +128,7 @@ namespace LocalityBaseNetCore.Controllers
 
         public IActionResult _AddLocality()
         {
-            ViewBag.id = db.Localities.Count() + 1;
+            ViewBag.id = db.LocalitiesCount() + 1;
             return View();
         }
         
@@ -146,8 +146,7 @@ namespace LocalityBaseNetCore.Controllers
                     return $"ERROR: People Count is not a number, please try again";
                 if (!Regex.IsMatch(loc.Budget, "\\d+[\\.,]?\\d*"))
                     return $"ERROR: Budget is not a number, please try again";
-                db.Add(new Locality(loc));
-                db.SaveChanges();
+                db.AddLocality(new Locality(loc));
                 return $"Added new locality: {loc.Name}, type: {loc.Type}";
             }
 
