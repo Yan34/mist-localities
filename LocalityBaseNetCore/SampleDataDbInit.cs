@@ -7,9 +7,9 @@ namespace LocalityBaseNetCore
     {
         public static void Initialize(LocalitiesContext context)
         {
-            if (!context.Localities.Any())
+            if (!context.GetLocalities().Any())
             {
-                context.Localities.AddRange(
+                context.AddLocalities(
                     new Locality
                     {
                         Name = "Ленинск",
@@ -47,7 +47,6 @@ namespace LocalityBaseNetCore
                         Headman = "Горевский Сергей Евгеньевич"
                     }
                 );
-                context.SaveChanges();
             }
         }
     }
