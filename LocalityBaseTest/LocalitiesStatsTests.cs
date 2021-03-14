@@ -272,5 +272,104 @@ namespace LocalityBaseTest
             //Assert
             Assert.Equal(ExpectededResult, AverageBudget);
         }
+        
+        
+        //GetFormattedDecimal tests
+        
+        [Fact]
+        public void GetFormattedDecimalZero()
+        {
+            //Arrange
+            decimal input = 0;
+            string ExpectedResult = "0";
+            //Act
+            string FormattedDecimal = GetFormattedDecimal(input);
+            //Assert
+            Assert.Equal(ExpectedResult, FormattedDecimal);
+        }
+
+        [Fact]
+        public void GetFormattedDecimalIntOneDigitNotZero()
+        {
+            //Arrange
+            decimal input = 5;
+            string ExpectedResult = "5";
+            //Act
+            string FormattedDecimal = GetFormattedDecimal(input);
+            //Assert
+            Assert.Equal(ExpectedResult, FormattedDecimal);
+        }
+
+        [Fact]
+        public void GetFormattedDecimalIntMultipleDigitEndsZero()
+        {
+            //Arrange
+            decimal input = 150;
+            string ExpectedResult = "150";
+            //Act
+            string FormattedDecimal = GetFormattedDecimal(input);
+            //Assert
+            Assert.Equal(ExpectedResult, FormattedDecimal);
+        }
+
+        [Fact]
+        public void GetFormattedDecimalIntMultipleDigitEndsOnlyZero()
+        {
+            //Arrange
+            decimal input = 200;
+            string ExpectedResult = "200";
+            //Act
+            string FormattedDecimal = GetFormattedDecimal(input);
+            //Assert
+            Assert.Equal(ExpectedResult, FormattedDecimal);
+        }
+
+        [Fact]
+        public void GetFormattedDecimalIntMultipleDigitEndsNotZero()
+        {
+            //Arrange
+            decimal input = 3946;
+            string ExpectedResult = "3946";
+            //Act
+            string FormattedDecimal = GetFormattedDecimal(input);
+            //Assert
+            Assert.Equal(ExpectedResult, FormattedDecimal);
+        }
+
+        [Fact]
+        public void GetFormattedDecimalDoubleOneDigitInMantissa()
+        {
+            //Arrange
+            decimal input = new decimal(1.5);
+            string ExpectedResult = "1.5";
+            //Act
+            string FormattedDecimal = GetFormattedDecimal(input);
+            //Assert
+            Assert.Equal(ExpectedResult, FormattedDecimal);
+        }
+
+        [Fact]
+        public void GetFormattedDecimalDoubleTwoDigitsInMantissa()
+        {
+            //Arrange
+            decimal input = new decimal(3.46);
+            string ExpectedResult = "3.46";
+            //Act
+            string FormattedDecimal = GetFormattedDecimal(input);
+            //Assert
+            Assert.Equal(ExpectedResult, FormattedDecimal);
+        }
+
+        [Fact]
+        public void GetFormattedDecimalDoubleMultipleDigitsInMantissa()
+        {
+            //Arrange
+            decimal input = new decimal(15.67843);
+            string ExpectedResult = "15.67843";
+            //Act
+            string FormattedDecimal = GetFormattedDecimal(input);
+            //Assert
+            Assert.Equal(ExpectedResult, FormattedDecimal);
+        }
     }
 }
