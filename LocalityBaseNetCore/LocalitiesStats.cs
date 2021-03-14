@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using LocalityBaseNetCore.Models;
 
 namespace LocalityBaseNetCore
@@ -9,11 +10,14 @@ namespace LocalityBaseNetCore
         public static decimal GetOverallPeople(List<Locality> locs)
         {
             decimal OverallPeople=0;
-            if(locs.Count!=0)
+            if (locs != null)
             {
-                foreach (var loc in locs)
+                if(locs.Count!=0)
                 {
-                    OverallPeople += loc.PeopleCount;
+                    foreach (var loc in locs)
+                    {
+                        OverallPeople += loc.PeopleCount;
+                    }
                 }
             }
             
@@ -23,11 +27,14 @@ namespace LocalityBaseNetCore
         public static decimal GetOverallBudget(List<Locality> locs)
         {
             decimal OverallBudget=0;
-            if(locs.Count!=0)
+            if (locs != null)
             {
-                foreach (var loc in locs)
+                if(locs.Count!=0)
                 {
-                    OverallBudget += loc.Budget;
+                    foreach (var loc in locs)
+                    {
+                        OverallBudget += loc.Budget;
+                    }
                 }
             }
             
@@ -37,9 +44,12 @@ namespace LocalityBaseNetCore
         public static decimal GetAveragePeople(List<Locality> locs)
         {
             decimal AveragePeople = 0;
-            if (locs.Count != 0)
+            if (locs != null)
             {
-                AveragePeople = decimal.Round( decimal.Divide(GetOverallPeople(locs), locs.Count), 3 );
+                if (locs.Count != 0)
+                {
+                    AveragePeople = decimal.Round( decimal.Divide(GetOverallPeople(locs), locs.Count), 3 );
+                }
             }
 
             return AveragePeople;
@@ -48,9 +58,12 @@ namespace LocalityBaseNetCore
         public static decimal GetAverageBudget(List<Locality> locs)
         {
             decimal AverageBudget = 0;
-            if (locs.Count != 0)
+            if (locs != null)
             {
-                AverageBudget = decimal.Round( decimal.Divide(GetOverallBudget(locs), locs.Count), 3 );
+                if (locs.Count != 0)
+                {
+                    AverageBudget = decimal.Round( decimal.Divide(GetOverallBudget(locs), locs.Count), 3 );
+                }
             }
 
             return AverageBudget;
@@ -59,7 +72,11 @@ namespace LocalityBaseNetCore
         public static string GetFormattedDecimal(decimal val)
         {
             string formatted = "";
-            formatted = val.ToString(CultureInfo.InvariantCulture).TrimEnd('0').TrimEnd('.');
+            string unformatted = val.ToString(CultureInfo.InvariantCulture);
+            if(Regex.Matches(unformatted, "\\.\\d*0+").Count != 0)
+                formatted = val.ToString(CultureInfo.InvariantCulture).TrimEnd('0').TrimEnd('.');
+            else
+                formatted = unformatted;
             
             return formatted;
         }
