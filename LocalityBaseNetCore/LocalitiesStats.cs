@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using LocalityBaseNetCore.Models;
 
 namespace LocalityBaseNetCore
@@ -71,7 +72,11 @@ namespace LocalityBaseNetCore
         public static string GetFormattedDecimal(decimal val)
         {
             string formatted = "";
-            formatted = val.ToString(CultureInfo.InvariantCulture).TrimEnd('0').TrimEnd('.');
+            string unformatted = val.ToString(CultureInfo.InvariantCulture);
+            if(Regex.Matches(unformatted, "\\.\\d*0+").Count != 0)
+                formatted = val.ToString(CultureInfo.InvariantCulture).TrimEnd('0').TrimEnd('.');
+            else
+                formatted = unformatted;
             
             return formatted;
         }
