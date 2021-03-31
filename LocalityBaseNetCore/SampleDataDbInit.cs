@@ -7,7 +7,8 @@ namespace LocalityBaseNetCore
     {
         public static void Initialize(LocalitiesContext context)
         {
-            if (!context.GetLocalities().Any())
+            
+            if (context.GetLocalities() == null || !context.GetLocalities().Any())
             {
                 context.AddLocalities(
                     new Locality
