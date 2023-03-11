@@ -28,7 +28,7 @@
                 <td>@loc.PeopleCount.ToString("F").TrimEnd('0').TrimEnd(',')</td>
                 <td>@loc.Budget.ToString("F").TrimEnd('0').TrimEnd(',')</td>
                 <td>@loc.Headman</td>
-                <td><button id="uptadeLoc" onclick="">Редактировать</button></td>
+                <td><a asp-action="UpdateLocality" asp-route-id="@loc.id">Редактировать</a></td>
                 <td><button id="deleteLoc">Удалить</button></td>
             </tr>
         }

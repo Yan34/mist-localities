@@ -15,5 +15,18 @@ namespace LocalityBaseNetCore.Models
         public string Budget { get; set; }
         
         public string Headman { get; set; }
+
+        public InputLocality() {}
+
+        public InputLocality(Locality loc)
+        {
+            id = loc.id;
+            Type = loc.Type;
+            Name = loc.Name;
+            Submission = loc.Submission;
+            PeopleCount = loc.PeopleCount.ToString();
+            Budget = loc.Budget.ToString();
+            Headman = loc.Headman;
+        }
     }
 }
