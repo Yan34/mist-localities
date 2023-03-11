@@ -45,6 +45,12 @@ namespace LocalityBaseNetCore.Models
             SaveChanges();
         }
 
+        public void DeleteLocality(int id)
+        {
+            Localities.Remove(Localities.Find(id));
+            SaveChanges();
+        }
+
         public int LocalitiesCount()
         {
             if(Localities.Any())

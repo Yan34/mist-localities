@@ -29,7 +29,11 @@
                 <td>@loc.Budget.ToString("F").TrimEnd('0').TrimEnd(',')</td>
                 <td>@loc.Headman</td>
                 <td><a asp-action="UpdateLocality" asp-route-id="@loc.id">Редактировать</a></td>
-                <td><button id="deleteLoc">Удалить</button></td>
+                <td>
+                    <form asp-route-id="@loc.id" asp-action="DeleteLocality" method="post">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
             </tr>
         }
     </table>

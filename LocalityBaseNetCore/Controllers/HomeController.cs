@@ -40,7 +40,7 @@ namespace LocalityBaseNetCore.Controllers
         }
         
         [HttpPost]
-        public string AddLocality(InputLocality loc)
+        public IActionResult AddLocality(InputLocality loc)
         {
             bool areAllPropsSet = loc.GetType().GetProperties().All(propertyInfo => propertyInfo.GetValue(loc) != null)
                 && !(loc.GetType().GetProperties()
@@ -50,14 +50,15 @@ namespace LocalityBaseNetCore.Controllers
             if(areAllPropsSet)
             {
                 if (!Regex.IsMatch(loc.PeopleCount, "\\d+[\\.,]?\\d*"))
-                    return $"ERROR: People Count is not a number, please try again";
+                    return Error("People Count is not a number, please try again");
                 if (!Regex.IsMatch(loc.Budget, "\\d+[\\.,]?\\d*"))
-                    return $"ERROR: Budget is not a number, please try again";
+                    return Error("Budget is not a number, please try again");
                 db.AddLocality(new Locality(loc));
-                return $"Added new locality: {loc.Name}, type: {loc.Type}";
+                //return $"Added new locality: {loc.Name}, type: {loc.Type}";
+                return RedirectToAction("Index");
             }
 
-            return $"ERROR: some property/ies is/are null, please try again";
+            return Error("Some property/ies is/are null, please try again");
         }
 
         [HttpGet]
@@ -86,6 +87,13 @@ namespace LocalityBaseNetCore.Controllers
             {
                 return Error("Some property/ies is/are null, please try again");
             }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteLocality(int id)
+        {
+            db.DeleteLocality(id);
             return RedirectToAction("Index");
         }
 
