@@ -7,7 +7,7 @@ namespace LocalityBaseAPI.Models
     {
         Task<IEnumerable<Locality> > GetLocalities();
         Task<Locality> GetLocality(int id);
-        Task<Locality> InsertLocality(Locality loc);
+        Task<Locality> AddLocality(Locality loc);
         Task<Locality> UpdateLocality(Locality loc);
         bool DeleteLocality(int id);
     }

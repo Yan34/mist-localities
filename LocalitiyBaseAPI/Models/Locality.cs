@@ -8,7 +8,6 @@ namespace LocalityBaseAPI.Models
     public class Locality
     {
         [Key]
-        [NotNull]
         public int id { get; set; }
         
         public string Type { get; set; }

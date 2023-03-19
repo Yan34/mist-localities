@@ -6,6 +6,8 @@ namespace LocalityBaseNetCore.Models
     {
         public string RequestId { get; set; }
 
+        public string ErrorText { get; set;  }
+
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }

@@ -24,24 +24,24 @@ namespace LocalityBaseAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetLocalities")]
+        [Route("")]
         public async Task<IActionResult> GetLocalities()
         {
             return Ok(await _db.GetLocalities());
         }
 
         [HttpGet]
-        [Route(("GetLocality/{id}"))]
+        [Route(("{id}"))]
         public async Task<IActionResult> GetLocality(int id)
         {
             return Ok(await _db.GetLocality(id));
         }
 
         [HttpPost]
-        [Route("AddLocality")]
-        public async Task<IActionResult> Post(Locality loc)
+        [Route("Add")]
+        public async Task<IActionResult> AddLocality(Locality loc)
         {
-            var result = await _db.InsertLocality(loc);
+            var result = await _db.AddLocality(loc);
             if(result.id == 0)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Unable to insert locality to DB");
@@ -50,16 +50,16 @@ namespace LocalityBaseAPI.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateLocality")]
-        public async Task<IActionResult> Put(Locality loc)
+        [Route("Update")]
+        public async Task<IActionResult> UpdateLocality(Locality loc)
         {
             await _db.UpdateLocality(loc);
             return Ok("Locality is updated");
         }
 
         [HttpDelete]
-        [Route("DeleteLocality/{id}")]
-        public JsonResult Delete(int id)
+        [Route("Delete/{id}")]
+        public JsonResult DeleteLocality(int id)
         {
             _db.DeleteLocality(id);
             return new JsonResult("Deleted Successfully");

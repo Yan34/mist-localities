@@ -25,7 +25,7 @@ namespace LocalityBaseAPI.Models
             return await Localities.FindAsync(id);
         }
 
-        public async Task<Locality> InsertLocality(Locality loc)
+        public async Task<Locality> AddLocality(Locality loc)
         {
             Localities.Add(loc);
             await SaveChangesAsync();
@@ -38,19 +38,15 @@ namespace LocalityBaseAPI.Models
             await SaveChangesAsync();
             return loc;
         }
-        public bool DeleteLocality(int ID)
+        public bool DeleteLocality(int id)
         {
             bool result = false;
-            var loc = Localities.Find(ID);
+            var loc = Localities.Find(id);
             if (loc != null)
             {
                 Entry(loc).State = EntityState.Deleted;
                 SaveChanges();
                 result = true;
-            }
-            else
-            {
-                result = false;
             }
             return result;
         }
