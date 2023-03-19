@@ -21,13 +21,19 @@
         </tr>
         @foreach (var loc in Model)
         {
-            <tr>
+            <tr id="@loc.id">
                 <td>@loc.Name</td>
                 <td>@loc.Type</td>
                 <td>@loc.Submission</td>
                 <td>@loc.PeopleCount.ToString("F").TrimEnd('0').TrimEnd(',')</td>
                 <td>@loc.Budget.ToString("F").TrimEnd('0').TrimEnd(',')</td>
                 <td>@loc.Headman</td>
+                <td><a asp-action="UpdateLocality" asp-route-id="@loc.id">Редактировать</a></td>
+                <td>
+                    <form asp-route-id="@loc.id" asp-action="DeleteLocality" method="post">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </td>
             </tr>
         }
     </table>
@@ -41,5 +47,9 @@
     function toggleTableVisibility() {
         let table=document.getElementById('AddLocalityForm');
         table.style.visibility==='collapse' ? table.style.visibility='visible' : table.style.visibility='collapse';
+    }
+
+    function name(parameters) {
+        
     }
 </script>

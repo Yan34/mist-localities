@@ -21,15 +21,33 @@ namespace LocalityBaseNetCore.Models
             return null;
         }
 
+        public Locality GetLocality(int id)
+        {
+            Locality loc = Localities.Find(id);
+            return loc;
+        }
+
         public void AddLocality(Locality loc)
         {
             Localities.Add(loc);
             SaveChanges();
         }
 
+        public void UpdateLocality(Locality loc)
+        {
+            Localities.Update(loc);
+            SaveChanges();
+        }
+
         public void AddLocalities(params Locality[] locs)
         {
             Localities.AddRange(locs);
+            SaveChanges();
+        }
+
+        public void DeleteLocality(int id)
+        {
+            Localities.Remove(Localities.Find(id));
             SaveChanges();
         }
 

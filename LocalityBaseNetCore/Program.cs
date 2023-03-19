@@ -23,7 +23,7 @@ namespace LocalityBaseNetCore
                 try
                 {
                     var context = services.GetRequiredService<LocalitiesContext>();
-                    SampleDataDbInit.Initialize(context);
+                    //SampleDataDbInit.Initialize(context);
                 }
                 catch (Exception ex)
                 {

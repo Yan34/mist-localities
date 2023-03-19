@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 using LocalityBaseNetCore.Models;
 
@@ -7,66 +8,66 @@ namespace LocalityBaseNetCore
 {
     public static class LocalitiesStats
     {
-        public static decimal GetOverallPeople(List<Locality> locs)
+        public static decimal GetOverallPeople(IEnumerable<Locality> locs)
         {
-            decimal OverallPeople=0;
+            decimal overallPeople=0;
             if (locs != null)
             {
-                if(locs.Count!=0)
+                if(locs.Count()!=0)
                 {
                     foreach (var loc in locs)
                     {
-                        OverallPeople += loc.PeopleCount;
+                        overallPeople += loc.PeopleCount;
                     }
                 }
             }
             
-            return OverallPeople;
+            return overallPeople;
         }
 
-        public static decimal GetOverallBudget(List<Locality> locs)
+        public static decimal GetOverallBudget(IEnumerable<Locality> locs)
         {
-            decimal OverallBudget=0;
+            decimal overallBudget=0;
             if (locs != null)
             {
-                if(locs.Count!=0)
+                if(locs.Count()!=0)
                 {
                     foreach (var loc in locs)
                     {
-                        OverallBudget += loc.Budget;
+                        overallBudget += loc.Budget;
                     }
                 }
             }
             
-            return OverallBudget;
+            return overallBudget;
         }
 
-        public static decimal GetAveragePeople(List<Locality> locs)
+        public static decimal GetAveragePeople(IEnumerable<Locality> locs)
         {
-            decimal AveragePeople = 0;
+            decimal averagePeople = 0;
             if (locs != null)
             {
-                if (locs.Count != 0)
+                if (locs.Count() != 0)
                 {
-                    AveragePeople = decimal.Round( decimal.Divide(GetOverallPeople(locs), locs.Count), 3 );
+                    averagePeople = decimal.Round( decimal.Divide(GetOverallPeople(locs), locs.Count()), 3 );
                 }
             }
 
-            return AveragePeople;
+            return averagePeople;
         }
 
-        public static decimal GetAverageBudget(List<Locality> locs)
+        public static decimal GetAverageBudget(IEnumerable<Locality> locs)
         {
-            decimal AverageBudget = 0;
+            decimal averageBudget = 0;
             if (locs != null)
             {
-                if (locs.Count != 0)
+                if (locs.Count() != 0)
                 {
-                    AverageBudget = decimal.Round( decimal.Divide(GetOverallBudget(locs), locs.Count), 3 );
+                    averageBudget = decimal.Round( decimal.Divide(GetOverallBudget(locs), locs.Count()), 3 );
                 }
             }
 
-            return AverageBudget;
+            return averageBudget;
         }
 
         public static string GetFormattedDecimal(decimal val)
