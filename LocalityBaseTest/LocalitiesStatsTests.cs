@@ -17,11 +17,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             List<Locality> locs = null;
-            decimal ExpectededResult = 0;
+            decimal expectededResult = 0;
             //Act
-            decimal OverallPeople = GetOverallPeople(locs);
+            decimal overallPeople = GetOverallPeople(locs);
             //Assert
-            Assert.Equal(ExpectededResult, OverallPeople);
+            Assert.Equal(expectededResult, overallPeople);
         }
         
         
@@ -30,11 +30,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             List<Locality> locs = new List<Locality>();
-            decimal ExpectededResult = 0;
+            decimal expectededResult = 0;
             //Act
-            decimal OverallPeople = GetOverallPeople(locs);
+            decimal overallPeople = GetOverallPeople(locs);
             //Assert
-            Assert.Equal(ExpectededResult, OverallPeople);
+            Assert.Equal(expectededResult, overallPeople);
         }
         
         
@@ -46,11 +46,11 @@ namespace LocalityBaseTest
             Locality loc = new Locality();
             loc.PeopleCount = 100;
             locs.Add(loc);
-            decimal ExpectededResult = 100;
+            decimal expectededResult = 100;
             //Act
-            decimal OverallPeople = GetOverallPeople(locs);
+            decimal overallPeople = GetOverallPeople(locs);
             //Assert
-            Assert.Equal(ExpectededResult, OverallPeople);
+            Assert.Equal(expectededResult, overallPeople);
         }
         
         
@@ -59,19 +59,19 @@ namespace LocalityBaseTest
         {
             //Arrange
             List<Locality> locs = new List<Locality>();
-            decimal ExpectededResult = 0;
+            decimal expectededResult = 0;
             for (int i = 10; i <= 100; i+=10)
             {
                 Locality loc = new Locality();
                 decimal rand = new decimal( new Random().NextDouble() * i );
-                ExpectededResult += rand;
+                expectededResult += rand;
                 loc.PeopleCount = rand;
                 locs.Add(loc);
             }
             //Act
-            decimal OverallPeople = GetOverallPeople(locs);
+            decimal overallPeople = GetOverallPeople(locs);
             //Assert
-            Assert.Equal(ExpectededResult, OverallPeople);
+            Assert.Equal(expectededResult, overallPeople);
         }
         
         
@@ -82,11 +82,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             List<Locality> locs = null;
-            decimal ExpectededResult = 0;
+            decimal expectededResult = 0;
             //Act
-            decimal AveragePeople = GetAveragePeople(locs);
+            decimal averagePeople = GetAveragePeople(locs);
             //Assert
-            Assert.Equal(ExpectededResult, AveragePeople);
+            Assert.Equal(expectededResult, averagePeople);
         }
         
         
@@ -95,11 +95,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             List<Locality> locs = new List<Locality>();
-            decimal ExpectededResult = 0;
+            decimal expectededResult = 0;
             //Act
-            decimal AveragePeople = GetAveragePeople(locs);
+            decimal averagePeople = GetAveragePeople(locs);
             //Assert
-            Assert.Equal(ExpectededResult, AveragePeople);
+            Assert.Equal(expectededResult, averagePeople);
         }
         
         
@@ -111,11 +111,11 @@ namespace LocalityBaseTest
             Locality loc = new Locality();
             loc.PeopleCount = 100;
             locs.Add(loc);
-            decimal ExpectededResult = 100;
+            decimal expectededResult = 100;
             //Act
-            decimal AveragePeople = GetAveragePeople(locs);
+            decimal averagePeople = GetAveragePeople(locs);
             //Assert
-            Assert.Equal(ExpectededResult, AveragePeople);
+            Assert.Equal(expectededResult, averagePeople);
         }
         
         
@@ -134,11 +134,11 @@ namespace LocalityBaseTest
                 loc.PeopleCount = rand;
                 locs.Add(loc);
             }
-            decimal ExpectededResult = decimal.Round( decimal.Divide(sum, count), 3 );
+            decimal expectededResult = decimal.Round( decimal.Divide(sum, count), 3 );
             //Act
-            decimal AveragePeople = GetAveragePeople(locs);
+            decimal averagePeople = GetAveragePeople(locs);
             //Assert
-            Assert.Equal(ExpectededResult, AveragePeople);
+            Assert.Equal(expectededResult, averagePeople);
         }
         
         
@@ -149,11 +149,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             List<Locality> locs = null;
-            decimal ExpectededResult = 0;
+            decimal expectededResult = 0;
             //Act
-            decimal OverallPeople = GetOverallBudget(locs);
+            decimal overallPeople = GetOverallBudget(locs);
             //Assert
-            Assert.Equal(ExpectededResult, OverallPeople);
+            Assert.Equal(expectededResult, overallPeople);
         }
         
         
@@ -162,11 +162,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             List<Locality> locs = new List<Locality>();
-            decimal ExpectededResult = 0;
+            decimal expectededResult = 0;
             //Act
-            decimal OverallPeople = GetOverallBudget(locs);
+            decimal overallPeople = GetOverallBudget(locs);
             //Assert
-            Assert.Equal(ExpectededResult, OverallPeople);
+            Assert.Equal(expectededResult, overallPeople);
         }
         
         
@@ -178,11 +178,11 @@ namespace LocalityBaseTest
             Locality loc = new Locality();
             loc.Budget = 100;
             locs.Add(loc);
-            decimal ExpectededResult = 100;
+            decimal expectededResult = 100;
             //Act
-            decimal OverallPeople = GetOverallBudget(locs);
+            decimal overallPeople = GetOverallBudget(locs);
             //Assert
-            Assert.Equal(ExpectededResult, OverallPeople);
+            Assert.Equal(expectededResult, overallPeople);
         }
         
         
@@ -191,19 +191,19 @@ namespace LocalityBaseTest
         {
             //Arrange
             List<Locality> locs = new List<Locality>();
-            decimal ExpectededResult = 0;
+            decimal expectededResult = 0;
             for (int i = 10; i <= 100; i+=10)
             {
                 Locality loc = new Locality();
                 decimal rand = new decimal( new Random().NextDouble() * i );
-                ExpectededResult += rand;
+                expectededResult += rand;
                 loc.Budget = rand;
                 locs.Add(loc);
             }
             //Act
-            decimal OverallPeople = GetOverallBudget(locs);
+            decimal overallPeople = GetOverallBudget(locs);
             //Assert
-            Assert.Equal(ExpectededResult, OverallPeople);
+            Assert.Equal(expectededResult, overallPeople);
         }
         
         
@@ -214,11 +214,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             List<Locality> locs = null;
-            decimal ExpectededResult = 0;
+            decimal expectededResult = 0;
             //Act
-            decimal AveragePeople = GetAverageBudget(locs);
+            decimal averagePeople = GetAverageBudget(locs);
             //Assert
-            Assert.Equal(ExpectededResult, AveragePeople);
+            Assert.Equal(expectededResult, averagePeople);
         }
         
         
@@ -227,11 +227,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             List<Locality> locs = new List<Locality>();
-            decimal ExpectededResult = 0;
+            decimal expectededResult = 0;
             //Act
-            decimal AveragePeople = GetAverageBudget(locs);
+            decimal averagePeople = GetAverageBudget(locs);
             //Assert
-            Assert.Equal(ExpectededResult, AveragePeople);
+            Assert.Equal(expectededResult, averagePeople);
         }
         
         
@@ -243,11 +243,11 @@ namespace LocalityBaseTest
             Locality loc = new Locality();
             loc.Budget = 100;
             locs.Add(loc);
-            decimal ExpectededResult = 100;
+            decimal expectededResult = 100;
             //Act
-            decimal AverageBudget = GetAverageBudget(locs);
+            decimal averageBudget = GetAverageBudget(locs);
             //Assert
-            Assert.Equal(ExpectededResult, AverageBudget);
+            Assert.Equal(expectededResult, averageBudget);
         }
         
         
@@ -266,11 +266,11 @@ namespace LocalityBaseTest
                 loc.Budget = rand;
                 locs.Add(loc);
             }
-            decimal ExpectededResult = decimal.Round( decimal.Divide(sum, count), 3 );
+            decimal expectededResult = decimal.Round( decimal.Divide(sum, count), 3 );
             //Act
-            decimal AverageBudget = GetAverageBudget(locs);
+            decimal averageBudget = GetAverageBudget(locs);
             //Assert
-            Assert.Equal(ExpectededResult, AverageBudget);
+            Assert.Equal(expectededResult, averageBudget);
         }
         
         
@@ -281,11 +281,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             decimal input = 0;
-            string ExpectedResult = "0";
+            string expectedResult = "0";
             //Act
-            string FormattedDecimal = GetFormattedDecimal(input);
+            string formattedDecimal = GetFormattedDecimal(input);
             //Assert
-            Assert.Equal(ExpectedResult, FormattedDecimal);
+            Assert.Equal(expectedResult, formattedDecimal);
         }
 
         [Fact]
@@ -293,11 +293,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             decimal input = 5;
-            string ExpectedResult = "5";
+            string expectedResult = "5";
             //Act
-            string FormattedDecimal = GetFormattedDecimal(input);
+            string formattedDecimal = GetFormattedDecimal(input);
             //Assert
-            Assert.Equal(ExpectedResult, FormattedDecimal);
+            Assert.Equal(expectedResult, formattedDecimal);
         }
 
         [Fact]
@@ -305,11 +305,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             decimal input = 150;
-            string ExpectedResult = "150";
+            string expectedResult = "150";
             //Act
-            string FormattedDecimal = GetFormattedDecimal(input);
+            string formattedDecimal = GetFormattedDecimal(input);
             //Assert
-            Assert.Equal(ExpectedResult, FormattedDecimal);
+            Assert.Equal(expectedResult, formattedDecimal);
         }
 
         [Fact]
@@ -317,11 +317,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             decimal input = 200;
-            string ExpectedResult = "200";
+            string expectedResult = "200";
             //Act
-            string FormattedDecimal = GetFormattedDecimal(input);
+            string formattedDecimal = GetFormattedDecimal(input);
             //Assert
-            Assert.Equal(ExpectedResult, FormattedDecimal);
+            Assert.Equal(expectedResult, formattedDecimal);
         }
 
         [Fact]
@@ -329,11 +329,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             decimal input = 3946;
-            string ExpectedResult = "3946";
+            string expectedResult = "3946";
             //Act
-            string FormattedDecimal = GetFormattedDecimal(input);
+            string formattedDecimal = GetFormattedDecimal(input);
             //Assert
-            Assert.Equal(ExpectedResult, FormattedDecimal);
+            Assert.Equal(expectedResult, formattedDecimal);
         }
 
         [Fact]
@@ -341,11 +341,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             decimal input = new decimal(1.5);
-            string ExpectedResult = "1.5";
+            string expectedResult = "1.5";
             //Act
-            string FormattedDecimal = GetFormattedDecimal(input);
+            string formattedDecimal = GetFormattedDecimal(input);
             //Assert
-            Assert.Equal(ExpectedResult, FormattedDecimal);
+            Assert.Equal(expectedResult, formattedDecimal);
         }
 
         [Fact]
@@ -353,11 +353,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             decimal input = new decimal(3.46);
-            string ExpectedResult = "3.46";
+            string expectedResult = "3.46";
             //Act
-            string FormattedDecimal = GetFormattedDecimal(input);
+            string formattedDecimal = GetFormattedDecimal(input);
             //Assert
-            Assert.Equal(ExpectedResult, FormattedDecimal);
+            Assert.Equal(expectedResult, formattedDecimal);
         }
 
         [Fact]
@@ -365,11 +365,11 @@ namespace LocalityBaseTest
         {
             //Arrange
             decimal input = new decimal(15.67843);
-            string ExpectedResult = "15.67843";
+            string expectedResult = "15.67843";
             //Act
-            string FormattedDecimal = GetFormattedDecimal(input);
+            string formattedDecimal = GetFormattedDecimal(input);
             //Assert
-            Assert.Equal(ExpectedResult, FormattedDecimal);
+            Assert.Equal(expectedResult, formattedDecimal);
         }
     }
 }

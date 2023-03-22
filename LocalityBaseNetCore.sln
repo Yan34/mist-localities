@@ -6,8 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalityBaseNetCore", "LocalityBaseNetCore\LocalityBaseNetCore.csproj", "{134FBAA1-D79A-4F01-B3C7-A50F49B6AB56}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalityBaseTest", "LocalityBaseTest\LocalityBaseTest.csproj", "{12A82716-928D-4CC8-9383-5EB7A42EB77C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{920D664D-0BE1-42A2-A769-39BC9A56677A} = {920D664D-0BE1-42A2-A769-39BC9A56677A}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalityBaseAPI", "LocalitiyBaseAPI\LocalityBaseAPI.csproj", "{920D664D-0BE1-42A2-A769-39BC9A56677A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalityBaseAPI", "LocalitiyBaseAPI\LocalityBaseAPI.csproj", "{920D664D-0BE1-42A2-A769-39BC9A56677A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
