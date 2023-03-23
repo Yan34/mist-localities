@@ -19,23 +19,32 @@ namespace LocalityBaseNetCore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly LocalitiesContext _db;
+        // private readonly LocalitiesContext _db;
         private readonly ILogger<HomeController> _logger;
 
         private readonly string _url = "https://localhost:44331/api/Localities/";
         HttpClient client = new HttpClient();
 
-        public HomeController(LocalitiesContext context, ILogger<HomeController> logger)
+        private void ApiRequestLog(string type, string url, HttpResponseMessage response)
         {
-            _db = context;
+            var logMsg = "{type} {url} {version} {code}";
+            _logger.Log(response.IsSuccessStatusCode ? LogLevel.Information : LogLevel.Warning, logMsg, type, url,
+                "HTTP/"+response.Version.ToString(), (int)response.StatusCode);
+        }
+
+        public HomeController(/*LocalitiesContext context,*/ ILogger<HomeController> logger)
+        {
+            // _db = context;
             _logger = logger;
         }
         
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var locs = JsonConvert.DeserializeObject<IEnumerable<Locality>>(
-                await client.GetStringAsync(_url));
+            var response = await client.GetAsync(_url);
+            ApiRequestLog("GET", _url, response);
+            var responseString = await response.Content.ReadAsStringAsync();
+            var locs = JsonConvert.DeserializeObject<IEnumerable<Locality>>(responseString);
             ViewBag.OverallPeople = GetFormattedDecimal(GetOverallPeople(locs));
             ViewBag.AveragePeople = GetFormattedDecimal(GetAveragePeople(locs));
             ViewBag.OverallBudget = GetFormattedDecimal(GetOverallBudget(locs));
@@ -63,6 +72,7 @@ namespace LocalityBaseNetCore.Controllers
                 if (!Regex.IsMatch(loc.Budget, "^\\d+[\\.,]?\\d*$"))
                     throw new Exception("Budget is not a number, please try again");
                 var answer = await client.PostAsync(_url+"Add", new StringContent(JsonConvert.SerializeObject(new Locality(loc)), Encoding.Default, "application/json-patch+json"));
+                ApiRequestLog("POST", _url + "Add", answer);
                 // return $"Added new locality: {loc.Name}, type: {loc.Type}";
                 if (answer.IsSuccessStatusCode)
                 {
@@ -77,7 +87,10 @@ namespace LocalityBaseNetCore.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateLocality(int id)
         {
-            var loc = JsonConvert.DeserializeObject<Locality>(await client.GetStringAsync(_url + id));
+            var response = await client.GetAsync(_url + id);
+            ApiRequestLog("GET", _url + id, response);
+            var responseString = await response.Content.ReadAsStringAsync();
+            var loc = JsonConvert.DeserializeObject<Locality>(responseString);
             return View(new InputLocality(loc));
         }
 
@@ -95,6 +108,7 @@ namespace LocalityBaseNetCore.Controllers
             if (!Regex.IsMatch(loc.Budget, "^\\d+[\\.,]?\\d*$"))
                 throw new Exception("Budget is not a number, please try again");
             var answer = await client.PutAsync(_url + "Update", new StringContent(JsonConvert.SerializeObject(new Locality(loc)), Encoding.Default, "application/json-patch+json"));
+            ApiRequestLog("PUT", _url + "Update", answer);
             if (answer.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -106,6 +120,7 @@ namespace LocalityBaseNetCore.Controllers
         public async Task<IActionResult> DeleteLocality(int id)
         {
             var answer = await client.DeleteAsync(_url + "Delete/" + id);
+            ApiRequestLog("DELETE", _url + "Delete/" + id, answer);
             return RedirectToAction("Index");
         }
 

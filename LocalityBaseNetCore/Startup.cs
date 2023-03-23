@@ -9,10 +9,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using NReco.Logging.File;
 
 namespace LocalityBaseNetCore
 {
@@ -28,8 +31,16 @@ namespace LocalityBaseNetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<LocalitiesContext>(options => options.UseSqlServer(connection));
+            services.AddLogging(loggingBuilder => {
+                loggingBuilder.AddFile("app_{0:yyyy}-{0:MM}-{0:dd}.log", fileLoggerOpts => {
+                    fileLoggerOpts.FormatLogFileName = fName => {
+                        return String.Format(fName, DateTime.UtcNow);
+                    };
+                    fileLoggerOpts.MinLevel = LogLevel.Information;
+                });
+            });
+            // string connection = Configuration.GetConnectionString("DefaultConnection");
+            // services.AddDbContext<LocalitiesContext>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
         }
 

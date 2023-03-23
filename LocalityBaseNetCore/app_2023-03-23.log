@@ -1,0 +1,14 @@
+2023-03-23T18:25:58.5528901+03:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Application started. Press Ctrl+C to shut down.
+2023-03-23T18:25:58.5858545+03:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Hosting environment: Development
+2023-03-23T18:25:58.5937381+03:00	INFO	[Microsoft.Hosting.Lifetime]	[0]	Content root path: C:\Users\Yan-Laptop\Documents\University\MiST\LocalityBaseNetCore\LocalityBaseNetCore
+2023-03-23T18:26:02.0904344+03:00	INFO	[LocalityBaseNetCore.Controllers.HomeController]	[0]	GET https://localhost:44331/api/Localities/ HTTP/1.1 200
+2023-03-23T18:26:37.9976447+03:00	INFO	[LocalityBaseNetCore.Controllers.HomeController]	[0]	GET https://localhost:44331/api/Localities/5 HTTP/1.1 200
+2023-03-23T18:26:58.4270252+03:00	INFO	[LocalityBaseNetCore.Controllers.HomeController]	[0]	PUT https://localhost:44331/api/Localities/Update HTTP/1.1 200
+2023-03-23T18:26:58.9130666+03:00	INFO	[LocalityBaseNetCore.Controllers.HomeController]	[0]	GET https://localhost:44331/api/Localities/ HTTP/1.1 200
+2023-03-23T18:27:25.3159764+03:00	INFO	[LocalityBaseNetCore.Controllers.HomeController]	[0]	GET https://localhost:44331/api/Localities/5 HTTP/1.1 200
+2023-03-23T18:28:11.0147413+03:00	INFO	[LocalityBaseNetCore.Controllers.HomeController]	[0]	PUT https://localhost:44331/api/Localities/Update HTTP/1.1 200
+2023-03-23T18:28:11.1103459+03:00	INFO	[LocalityBaseNetCore.Controllers.HomeController]	[0]	GET https://localhost:44331/api/Localities/ HTTP/1.1 200
+2023-03-23T18:28:35.6888258+03:00	INFO	[LocalityBaseNetCore.Controllers.HomeController]	[0]	POST https://localhost:44331/api/Localities/Add HTTP/1.1 200
+2023-03-23T18:28:35.7809566+03:00	INFO	[LocalityBaseNetCore.Controllers.HomeController]	[0]	GET https://localhost:44331/api/Localities/ HTTP/1.1 200
+2023-03-23T18:28:46.2756995+03:00	INFO	[LocalityBaseNetCore.Controllers.HomeController]	[0]	DELETE https://localhost:44331/api/Localities/Delete/2021 HTTP/1.1 200
+2023-03-23T18:28:46.5798556+03:00	INFO	[LocalityBaseNetCore.Controllers.HomeController]	[0]	GET https://localhost:44331/api/Localities/ HTTP/1.1 200
