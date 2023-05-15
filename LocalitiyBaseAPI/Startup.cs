@@ -63,6 +63,7 @@ namespace LocalityBaseAPI
             }
             else
             {
+                app.UseStatusCodePages();
                 app.UseHsts();
             }
 

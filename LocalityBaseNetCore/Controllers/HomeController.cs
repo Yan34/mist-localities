@@ -22,7 +22,7 @@ namespace LocalityBaseNetCore.Controllers
         // private readonly LocalitiesContext _db;
         private readonly ILogger<HomeController> _logger;
 
-        private readonly string _url = "https://localhost:44331/api/Localities/";
+        private readonly string _url = "https://localhost:5001/api/Localities/";
         HttpClient client = new HttpClient();
 
         private void ApiRequestLog(string type, string url, HttpResponseMessage response)
@@ -56,32 +56,39 @@ namespace LocalityBaseNetCore.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> AddLocality(InputLocality loc)
         {
             bool areAllPropsSet = loc.GetType().GetProperties().All(propertyInfo => propertyInfo.GetValue(loc) != null)
-                && !(loc.GetType().GetProperties()
-                    .Where(pi => pi.GetValue(loc) is string)
-                    .Select(pi => (string) pi.GetValue(loc))
-                    .Any(value => String.IsNullOrEmpty(value)));
-            if(areAllPropsSet)
+                                  && !(loc.GetType().GetProperties()
+                                      .Where(pi => pi.GetValue(loc) is string)
+                                      .Select(pi => (string)pi.GetValue(loc))
+                                      .Any(value => String.IsNullOrEmpty(value)));
+            try
             {
-                if (!Regex.IsMatch(loc.PeopleCount, "^\\d+[\\.,]?\\d*$"))
-                    throw new Exception("People Count is not a number, please try again");
-                if (!Regex.IsMatch(loc.Budget, "^\\d+[\\.,]?\\d*$"))
-                    throw new Exception("Budget is not a number, please try again");
-                var answer = await client.PostAsync(_url+"Add", new StringContent(JsonConvert.SerializeObject(new Locality(loc)), Encoding.Default, "application/json-patch+json"));
-                ApiRequestLog("POST", _url + "Add", answer);
-                // return $"Added new locality: {loc.Name}, type: {loc.Type}";
-                if (answer.IsSuccessStatusCode)
+                if (areAllPropsSet)
                 {
-                    return RedirectToAction("Index");
+                    if (!Regex.IsMatch(loc.PeopleCount, "^\\d+[\\.,]?\\d*$"))
+                        throw new Exception("People Count is not a number, please try again");
+                    if (!Regex.IsMatch(loc.Budget, "^\\d+[\\.,]?\\d*$"))
+                        throw new Exception("Budget is not a number, please try again");
+                    var answer = await client.PostAsync(_url + "Add",
+                        new StringContent(JsonConvert.SerializeObject(new Locality(loc)), Encoding.Default,
+                            "application/json-patch+json"));
+                    ApiRequestLog("POST", _url + "Add", answer);
+                    if (!answer.IsSuccessStatusCode)
+                        throw new Exception(answer.ReasonPhrase);
                 }
-                throw new Exception(answer.ReasonPhrase);
+                else
+                    throw new Exception("Some property/ies is/are null, please try again");
             }
-            // return RedirectToAction("Index");
-            throw new Exception("Some property/ies is/are null, please try again");
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, ex.Message);
+                throw;
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -102,18 +109,30 @@ namespace LocalityBaseNetCore.Controllers
                                       .Where(pi => pi.GetValue(loc) is string)
                                       .Select(pi => (string)pi.GetValue(loc))
                                       .Any(value => string.IsNullOrEmpty(value)));
-            if (!areAllPropsSet) throw new Exception("Some property/ies is/are null, please try again");
-            if (!Regex.IsMatch(loc.PeopleCount, "^\\d+[\\.,]?\\d*$"))
-                throw new Exception("People Count is not a number, please try again");
-            if (!Regex.IsMatch(loc.Budget, "^\\d+[\\.,]?\\d*$"))
-                throw new Exception("Budget is not a number, please try again");
-            var answer = await client.PutAsync(_url + "Update", new StringContent(JsonConvert.SerializeObject(new Locality(loc)), Encoding.Default, "application/json-patch+json"));
-            ApiRequestLog("PUT", _url + "Update", answer);
-            if (answer.IsSuccessStatusCode)
+            try
             {
-                return RedirectToAction("Index");
+                if (areAllPropsSet)
+                {
+                    if (!Regex.IsMatch(loc.PeopleCount, "^\\d+[\\.,]?\\d*$"))
+                        throw new Exception("People Count is not a number, please try again");
+                    if (!Regex.IsMatch(loc.Budget, "^\\d+[\\.,]?\\d*$"))
+                        throw new Exception("Budget is not a number, please try again");
+                    var answer = await client.PutAsync(_url + "Update",
+                        new StringContent(JsonConvert.SerializeObject(new Locality(loc)), Encoding.Default,
+                            "application/json-patch+json"));
+                    ApiRequestLog("PUT", _url + "Update", answer);
+                    if (!answer.IsSuccessStatusCode) throw new Exception(answer.ReasonPhrase);
+
+                }
+                else
+                    throw new Exception("Some property/ies is/are null, please try again");
             }
-            throw new Exception(answer.ReasonPhrase);
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, ex.Message);
+                throw;
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

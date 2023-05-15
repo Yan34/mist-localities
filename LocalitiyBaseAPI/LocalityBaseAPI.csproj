@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>LocalityBaseAPI</AssemblyName>
     <RootNamespace>LocalityBaseAPI</RootNamespace>
+    <UserSecretsId>f873108c-948b-48a6-b461-825c4a374e20</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

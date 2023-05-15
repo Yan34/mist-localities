@@ -63,7 +63,7 @@ namespace LocalityBaseTest
             return maxId;
         }
 
-        [Fact]
+        [Fact, TestPriority(1)]
         public async Task GetLocalitiesTest()
         {
             var response = await _client.GetAsync("/api/Localities/");
@@ -72,7 +72,7 @@ namespace LocalityBaseTest
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Fact]
+        [Fact, TestPriority(2)]
         public async Task AddLocalityTest()
         {
             Locality inLoc = new Locality
@@ -93,7 +93,7 @@ namespace LocalityBaseTest
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Fact]
+        [Fact, TestPriority(4)]
         public async Task GetLocalityByIdTest()
         {
             int maxId = await GetMaxId();
@@ -107,7 +107,7 @@ namespace LocalityBaseTest
             Assert.Equal(maxId, cotent.id);
         }
 
-        [Fact]
+        [Fact, TestPriority(3)]
         public async Task UpdateLocalityTest()
         {
             int maxId = await GetMaxId();
@@ -130,7 +130,7 @@ namespace LocalityBaseTest
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Fact]
+        [Fact, TestPriority(5)]
         public async Task DeleteLocalityTest()
         {
             int id = await GetMaxId();
