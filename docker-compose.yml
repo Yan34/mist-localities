@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  localitybasenetcore:
+    image: cloud.canister.io:5000/furmanyan/localitybasenetcore
+    build:
+      context: .
+      dockerfile: LocalityBaseNetCore/Dockerfile
+    ports:
+      - 5003:80
+
+  localitybaseapi:
+    image: cloud.canister.io:5000/furmanyan/localitybaseapi
+    build:
+      context: .
+      dockerfile: LocalitiyBaseAPI/Dockerfile
+    ports:
+      - 5001:80
+

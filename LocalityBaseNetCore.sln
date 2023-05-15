@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalityBaseTest", "Localit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalityBaseAPI", "LocalitiyBaseAPI\LocalityBaseAPI.csproj", "{920D664D-0BE1-42A2-A769-39BC9A56677A}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{AAF5C37F-4B15-4AA0-9AA9-BF6F80A0B657}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{920D664D-0BE1-42A2-A769-39BC9A56677A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{920D664D-0BE1-42A2-A769-39BC9A56677A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{920D664D-0BE1-42A2-A769-39BC9A56677A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAF5C37F-4B15-4AA0-9AA9-BF6F80A0B657}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAF5C37F-4B15-4AA0-9AA9-BF6F80A0B657}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAF5C37F-4B15-4AA0-9AA9-BF6F80A0B657}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAF5C37F-4B15-4AA0-9AA9-BF6F80A0B657}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
